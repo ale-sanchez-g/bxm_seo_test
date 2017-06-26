@@ -1,0 +1,28 @@
+{
+  "name": "bxm_seo_test",
+  "version": "0.0.1",
+  "description": "This is a test framework to test bxm seo strategy on their products",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": "6.1.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "htmlparser2": "^3.9.2",
+    "lighthouse": "^2.1.0",
+    "mocha": "^3.4.2",
+    "supertest": "^3.0.0"
+  },
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha",
+    "perf:test": "node ./node_modules/lighthouse/lighthouse-cli http://www.elle.com.au --perf --quiet --view",
+    "example": "mocha"
+  },
+  "keywords": [
+    "seo"
+  ],
+  "author": "alejandro sanchez-giraldo",
+  "license": "MIT"
+}
