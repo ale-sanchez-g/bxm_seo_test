@@ -120,5 +120,5 @@ crashlytics-build.properties
 # Shippable
 shippable/
 
-## HTML reports
-*.html
+### HTML reports
+#*.html

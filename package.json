@@ -16,8 +16,7 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha",
-    "html:test": "node ./node_modules/lighthouse/lighthouse-cli http://www.nowtolove.com.au/fashion/ --disable-network-throttling --perf --quiet --chrome-flags='--headless' --view",
+    "html:test": "node ./node_modules/lighthouse/lighthouse-cli http://www.nowtolove.com.au/royals/british-royal-family/best-royal-moments-2017-37868 --disable-network-throttling --perf --quiet --chrome-flags='--headless' --view",
     "mocha:test": "mocha ",
     "five:test": "bash -c \"for i in {1..5}; do npm run html:test; done\""
 

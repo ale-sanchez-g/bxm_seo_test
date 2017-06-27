@@ -137,4 +137,100 @@ module.exports = {
     //    }
     //}
 
+    //reviewExpectedSchema: function() {
+    //    {
+    //        "@context": "http://schema.org",
+    //        "@type": "WebPage",
+    //        "@id": "https://www.whichcar.com.au/car-reviews/honda-civic-review",
+    //        "url": "https://www.whichcar.com.au/car-reviews/honda-civic-review",
+    //        "isPartOf": {
+    //        "@type": "WebSite",
+    //            "@id": "https://www.whichcar.com.au/#site"
+    //    },
+    //        "breadcrumb": {
+    //        "@type": "BreadcrumbList",
+    //            "itemListElement": [
+    //            {
+    //                "@type": "ListItem",
+    //                "position": 1,
+    //                "item": {
+    //                    "@id": "https://www.whichcar.com.au",
+    //                    "name": "Home"
+    //                }
+    //            },
+    //            {
+    //                "@type": "ListItem",
+    //                "position": 2,
+    //                "item": {
+    //                    "@id": "https://www.whichcar.com.au/car-reviews",
+    //                    "name": "Car Reviews"
+    //                }
+    //            },
+    //            {
+    //                "@type": "ListItem",
+    //                "position": 3,
+    //                "item": {
+    //                    "@id": "https://www.whichcar.com.au/honda",
+    //                    "name": "Honda"
+    //                }
+    //            },
+    //            {
+    //                "@type": "ListItem",
+    //                "position": 4,
+    //                "item": {
+    //                    "@id": "https://www.whichcar.com.au/honda/civic",
+    //                    "name": "Civic"
+    //                }
+    //            }
+    //        ]
+    //    },
+    //        "mainEntity": {
+    //        "@type": "Car",
+    //            "@id": "https://www.whichcar.com.au/car-reviews/honda-civic-review#this",
+    //            "url": "https://www.whichcar.com.au/car-reviews/honda-civic-review",
+    //            "name": "2017 Honda Civic",
+    //            "brand": {
+    //            "@type": "Brand",
+    //                "@id": "https://www.whichcar.com.au/honda#this"
+    //        },
+    //        "model": "Civic",
+    //            "vehicleModelDate": 2017,
+    //        "image": {
+    //            "@type": "ImageObject",
+    //                "url": "https://d3lp4xedbqa8a5.cloudfront.net/imagegen/max/ccr/1023/-/s3/digital-cougar-assets/whichcar/2017/06/27/2643/Honda-Civic-VTi-LX-Hatch-2017-drive-WIDE.jpg",
+    //                "width": 700,
+    //                "height": 500
+    //        },
+    //        "review": {
+    //            "@type": "Review",
+    //                "@id": "https://www.whichcar.com.au/car-reviews/honda-civic-review#review",
+    //                "url": "https://www.whichcar.com.au/car-reviews/honda-civic-review",
+    //                "headline": "2017 Honda Civic Review",
+    //                "datePublished": "2017-06-22T06:31:00-0700",
+    //                "dateModified": "2017-06-22T06:31:23-0700",
+    //                "description": "2017 Honda Civic",
+    //                "author": {
+    //                "@type": "Person",
+    //                    "name": "By Byron Mathioudakis, with Tony O'Kane and WhichCar staff"
+    //            },
+    //            "publisher": {
+    //                "@type": "Organization",
+    //                    "@id": "Bauer Media Pty Limited"
+    //            },
+    //            "image": {
+    //                "@type": "ImageObject",
+    //                    "url": "https://d3lp4xedbqa8a5.cloudfront.net/imagegen/max/ccr/1023/-/s3/digital-cougar-assets/whichcar/2017/06/27/2643/Honda-Civic-VTi-LX-Hatch-2017-drive-WIDE.jpg",
+    //                    "width": 700,
+    //                    "height": 500
+    //            },
+    //            "reviewRating": {
+    //                "@type": "Rating",
+    //                    "worstRating": 0,
+    //                    "bestRating": 5,
+    //                    "ratingValue": 4
+    //            }
+    //        }
+    //    }
+    //    }
+    //}
 };

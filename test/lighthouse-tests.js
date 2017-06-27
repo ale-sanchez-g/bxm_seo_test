@@ -16,7 +16,7 @@ const flags = {};
 
 // Define our test url
 // You could just as easily start a local server to test as well
-const testUrl = 'http://www.nowtolove.com.au/';
+const testUrl = 'http://www.nowtolove.com.au/fashion';
 
 // Setup lighthouse options
 const lighthouseOptions = {
