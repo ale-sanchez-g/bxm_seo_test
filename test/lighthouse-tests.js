@@ -21,8 +21,7 @@ const testUrl = 'http://www.nowtolove.com.au/';
 // Setup lighthouse options
 const lighthouseOptions = {
     mobile: true,
-    loadPage: true,
-    disableNetworkThrottling: true
+    loadPage: true
 };
 
 // You can use your define custom Lighthouse configs, audits, and gatherers!
@@ -53,13 +52,15 @@ describe('Lighthouse PWA Testing', function() {
 });
 });
 
-it("should have service worker", (done) => {
-    let sw = _lhResult.preparedResults.find(r => {
-            return r.name === 'sw';
-});
-assert.equal(sw.value, true);
-done();
-});
+
+// We currenlty do not use Service Workers for Offline usage
+//it("should have service worker", (done) => {
+//    let sw = _lhResult.preparedResults.find(r => {
+//            return r.name === 'sw';
+//});
+//assert.equal(sw.value, true);
+//done();
+//});
 
 it("should have first meaningful paint < 500ms", (done) => {
     let ttfmp = _lhResult.preparedResults.find(r => {

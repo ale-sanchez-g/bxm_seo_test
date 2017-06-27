@@ -4,8 +4,8 @@
     "recordTrace": true,
     "gatherers": [
       "url",
-      "service-worker",
-      "offline"]
+      "service-worker"
+    ]
   }],
 
   "audits": [

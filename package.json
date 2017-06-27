@@ -17,8 +17,10 @@
   },
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha",
-    "perf:test": "node ./node_modules/lighthouse/lighthouse-cli http://www.elle.com.au --perf --quiet --view",
-    "example": "mocha"
+    "html:test": "node ./node_modules/lighthouse/lighthouse-cli http://www.nowtolove.com.au/fashion/ --disable-network-throttling --perf --quiet --chrome-flags='--headless' --view",
+    "mocha:test": "mocha ",
+    "five:test": "bash -c \"for i in {1..5}; do npm run html:test; done\""
+
   },
   "keywords": [
     "seo"
