@@ -62,6 +62,9 @@ describe('Lighthouse PWA Testing', function() {
 //done();
 //});
 
+
+// Currently 1000ms is to high the example had 500ms
+
 it("should have first meaningful paint < 1000ms", (done) => {
     let ttfmp = _lhResult.preparedResults.find(r => {
             return r.name === 'ttfmp';
@@ -70,6 +73,8 @@ console.log("current reading is => " + ttfmp.value + "ms");
 assert.isBelow(ttfmp.value, 1000);
 done();
 });
+
+// Currently 4000ms is to high the example had 1000ms
 
 it("should have time to interactive < 4000ms", (done) => {
     let tti = _lhResult.preparedResults.find(r => {
