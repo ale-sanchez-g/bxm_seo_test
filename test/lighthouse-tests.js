@@ -5,14 +5,12 @@ const l_h = require('lighthouse');
 const chromeLauncher = require('lighthouse/chrome-launcher');
 
 function lighthouse(url, flags = {}, config = null) {
-    return chromeLauncher.launch().then(chrome => {
+    return chromeLauncher.launch(flags).then(chrome => {
         flags.port = chrome.port;
     return l_h(url, flags, config).then(results =>
         chrome.kill().then(() => results));
 });
 }
-
-const flags = {};
 
 // Define our test url
 // You could just as easily start a local server to test as well
@@ -20,6 +18,7 @@ const testUrl = 'http://www.nowtolove.com.au/fashion';
 
 // Setup lighthouse options
 const lighthouseOptions = {
+    chromeFlags: ['--headless'],
     mobile: true,
     loadPage: true
 };
@@ -38,7 +37,7 @@ const ourMetrics = require('./metrics');
 describe('Lighthouse PWA Testing', function() {
 
     // Failsafe; could be long depending on what you're trying to test
-    this.timeout(60000);
+    this.timeout(40000);
 
     // We'll run our lighthouse set once and store for compare in this sample
     // you could very easily build a different sort of runner
