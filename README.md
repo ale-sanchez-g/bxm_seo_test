@@ -27,8 +27,18 @@ Use Git Bash only.
 
 Node module [npm-run-all](https://github.com/mysticatea/npm-run-all) cli is used to provide cross platform script parallelisation control.
 
-### test
+### mobile:test
 
-### html:test
+runs perf test on lighthouse and produces and HTML report - mobile breakpoint
+
+### desktop:test
+
+runs perf test on lighthouse and produces and HTML report - desktop breakpoint
 
 ### mocha:test
+
+runs all mocha test SEO and lighthouse perf test
+
+### five:test
+
+runs mobile:test 5 times so the user can create an average (test results do fluctuate) :(
