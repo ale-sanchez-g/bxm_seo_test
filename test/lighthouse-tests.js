@@ -39,7 +39,7 @@ const ourMetrics = require('./metrics');
         this.retries(2);
 
         // Failsafe; could be long depending on what you're trying to test
-        this.timeout(40000);
+        this.timeout(60000);
 
         // We'll run our lighthouse set once and store for compare in this sample
         // you could very easily build a different sort of runner
