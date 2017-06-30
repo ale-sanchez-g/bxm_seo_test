@@ -6,7 +6,7 @@ var schemas = require("./schemas.js");
 
 
 
-describe('Smoke test of listings service', function() {
+describe.skip('Smoke test of listings service', function() {
 
     it('respond with APP NAME', function(done) {
         this.retries(2);

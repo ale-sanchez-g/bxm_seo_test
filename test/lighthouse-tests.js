@@ -34,7 +34,7 @@ const auditConfig = require('./audits.json');
 // https://github.com/paulirish/pwmetrics/
 const ourMetrics = require('./metrics');
 
-    describe.skip('Lighthouse PWA Testing', function() {
+    describe('Lighthouse PWA Testing', function() {
         // Retry all tests in this suite up to 2 times
         this.retries(2);
 
