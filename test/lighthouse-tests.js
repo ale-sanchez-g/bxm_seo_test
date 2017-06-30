@@ -14,11 +14,11 @@ function lighthouse(url, flags = {}, config = null) {
 
 // Define our test url
 // You could just as easily start a local server to test as well
-const testUrl = 'http://www.nowtolove.com.au/fashion';
+const testUrl = 'http://now-site.test.bxm.net.au/fashion';
 
 // Setup lighthouse options
 const lighthouseOptions = {
-    chromeFlags: ['--headless'],
+    //chromeFlags: ['--headless'],
     mobile: true,
     loadPage: true
 };
@@ -34,7 +34,7 @@ const auditConfig = require('./audits.json');
 // https://github.com/paulirish/pwmetrics/
 const ourMetrics = require('./metrics');
 
-    describe('Lighthouse PWA Testing', function() {
+    describe.skip('Lighthouse PWA Testing', function() {
         // Retry all tests in this suite up to 2 times
         this.retries(2);
 
@@ -52,16 +52,6 @@ const ourMetrics = require('./metrics');
         done();
         });
     });
-
-
-// We currenlty do not use Service Workers for Offline usage
-//it("should have service worker", (done) => {
-//    let sw = _lhResult.preparedResults.find(r => {
-//            return r.name === 'sw';
-//});
-//assert.equal(sw.value, true);
-//done();
-//});
 
 
     // Currently 1000ms is to high the example had 500ms

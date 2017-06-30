@@ -50,6 +50,9 @@ module.exports = {
             { '@type': 'WebPage',
                 '@id': 'http://now-site.test.bxm.net.au/' } }
 
+    },
+
+    rssReponseSchema: function() {
     }
 
     // -> proper schemas

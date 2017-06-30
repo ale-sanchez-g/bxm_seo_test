@@ -5,7 +5,7 @@ var schemas = require("./schemas.js");
 
 const app = "http://now-site.test.bxm.net.au";
 
-describe('SEO Schema validations', function() {
+describe.skip('SEO Schema validations', function() {
 
     it('Go to Homepage of NTL and validate its schema', function(done) {
         request(app)
