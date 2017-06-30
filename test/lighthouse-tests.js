@@ -1,44 +1,44 @@
 const assert = require('chai').assert;
 
-function describeFruit(type) {
+function runTestArray(uri) {
 
 
-// Whhhhaaat? Yeah, you can import and use as you like.
-const l_h = require('lighthouse');
-const chromeLauncher = require('lighthouse/chrome-launcher');
+    // Whhhhaaat? Yeah, you can import and use as you like.
+    const l_h = require('lighthouse');
+    const chromeLauncher = require('lighthouse/chrome-launcher');
 
-function lighthouse(url, flags = {}, config = null) {
-    return chromeLauncher.launch(flags).then(chrome => {
-        flags.port = chrome.port;
-    return l_h(url, flags, config).then(results =>
-        chrome.kill().then(() => results));
-});
-}
+    function lighthouse(url, flags = {}, config = null) {
+        return chromeLauncher.launch(flags).then(chrome => {
+            flags.port = chrome.port;
+        return l_h(url, flags, config).then(results =>
+            chrome.kill().then(() => results));
+        });
+    }
 
-// Define our test url
-// You could just as easily start a local server to test as well
-//const testUrl = 'http://www.nowtolove.com.au/aww';
+    // Define our test url
+    // You could just as easily start a local server to test as well
+    //const testUrl = 'http://www.nowtolove.com.au/aww';
 
 
-// Setup lighthouse options
-const lighthouseOptions = {
-    chromeFlags: ['--headlessless'],
-    mobile: true,
-    loadPage: true
-};
+    // Setup lighthouse options
+    const lighthouseOptions = {
+        chromeFlags: ['--headlessless'],
+        mobile: true,
+        loadPage: true
+    };
 
-// You can use your define custom Lighthouse configs, audits, and gatherers!
-// You could also import pre-existing defines in the lighthouse repo, see:
-// https://github.com/GoogleChrome/lighthouse/tree/master/lighthouse-core/config
-// const auditConfig = require('lighthouse/lighthouse-core/config/perf.json');
-const auditConfig = require('./audits.json');
+    // You can use your define custom Lighthouse configs, audits, and gatherers!
+    // You could also import pre-existing defines in the lighthouse repo, see:
+    // https://github.com/GoogleChrome/lighthouse/tree/master/lighthouse-core/config
+    // const auditConfig = require('lighthouse/lighthouse-core/config/perf.json');
+    const auditConfig = require('./audits.json');
 
-// We'll process the results and then pass to our tests
-// Based on Paul Irish's PWMetric sample
-// https://github.com/paulirish/pwmetrics/
-const ourMetrics = require('./metrics');
+    // We'll process the results and then pass to our tests
+    // Based on Paul Irish's PWMetric sample
+    // https://github.com/paulirish/pwmetrics/
+    const ourMetrics = require('./metrics');
 
-    describe('Lighthouse PWA Testing' + type, function() {
+    describe('Lighthouse PWA Testing => ' + type, function() {
             // Retry all tests in this suite up to 2 times
             this.retries(2);
 
@@ -50,7 +50,7 @@ const ourMetrics = require('./metrics');
             let _lhResult = null;
 
             beforeEach('Run Lighthouse base test', (done) => {
-                lighthouse(type, lighthouseOptions, auditConfig)
+                lighthouse(uri, lighthouseOptions, auditConfig)
                     .then((res) => {
                     _lhResult = ourMetrics.prepareData(res);
             done();
@@ -87,6 +87,6 @@ const testUrl = ['http://www.nowtolove.com.au/','http://www.nowtolove.com.au/fas
 
 for (index = 0; index < testUrl.length; ++index) {
     console.log("testing => " + testUrl[index]);
-    describeFruit(testUrl[index]);
+    runTestArray(testUrl[index]);
 };
 
