@@ -14,7 +14,7 @@ function lighthouse(url, flags = {}, config = null) {
 
 // Define our test url
 // You could just as easily start a local server to test as well
-const testUrl = 'http://www.nowtolove.com.au/';
+const testUrl = ['http://www.nowtolove.com.au/','http://www.nowtolove.com.au/fashion', 'http://www.nowtolove.com.au/aww' ];
 
 // Setup lighthouse options
 const lighthouseOptions = {
@@ -34,45 +34,50 @@ const auditConfig = require('./audits.json');
 // https://github.com/paulirish/pwmetrics/
 const ourMetrics = require('./metrics');
 
-    describe('Lighthouse PWA Testing', function() {
-        // Retry all tests in this suite up to 2 times
-        this.retries(2);
+for(var i = 0; i < testUrl.length; i++){
 
-        // Failsafe; could be long depending on what you're trying to test
-        this.timeout(600000);
+console.log("TESTING URL => " + i);
 
-        // We'll run our lighthouse set once and store for compare in this sample
-        // you could very easily build a different sort of runner
-        let _lhResult = null;
+        describe('Lighthouse PWA Testing', function() {
+            // Retry all tests in this suite up to 2 times
+            this.retries(2);
 
-        beforeEach('Run Lighthouse base test', (done) => {
-            lighthouse(testUrl, lighthouseOptions, auditConfig)
-                .then((res) => {
-                _lhResult = ourMetrics.prepareData(res);
-        done();
+            // Failsafe; could be long depending on what you're trying to test
+            this.timeout(600000);
+
+            // We'll run our lighthouse set once and store for compare in this sample
+            // you could very easily build a different sort of runner
+            let _lhResult = null;
+
+            beforeEach('Run Lighthouse base test', (done) => {
+                lighthouse(i, lighthouseOptions, auditConfig)
+                    .then((res) => {
+                    _lhResult = ourMetrics.prepareData(res);
+            done();
+            });
+        });
+
+
+        // Currently 1000ms is to high the example had 500ms
+
+        it("should have first meaningful paint < 1000ms", (done) => {
+            let ttfmp = _lhResult.preparedResults.find(r => {
+                    return r.name === 'ttfmp';
+            });
+            console.log("current reading is => " + ttfmp.value + "ms");
+            assert.isBelow(ttfmp.value, 1000);
+            done();
+        });
+
+        // Currently 4000ms is to high the example had 1000ms
+
+        it("should have time to interactive < 4000ms", (done) => {
+            let tti = _lhResult.preparedResults.find(r => {
+                    return r.name === 'tti';
+            });
+            console.log("current reading is => " + tti.value + "ms");
+            assert.isBelow(tti.value, 4000);
+            done();
         });
     });
-
-
-    // Currently 1000ms is to high the example had 500ms
-
-    it("should have first meaningful paint < 1000ms", (done) => {
-        let ttfmp = _lhResult.preparedResults.find(r => {
-                return r.name === 'ttfmp';
-        });
-        console.log("current reading is => " + ttfmp.value + "ms");
-        assert.isBelow(ttfmp.value, 1000);
-        done();
-    });
-
-    // Currently 4000ms is to high the example had 1000ms
-
-    it("should have time to interactive < 4000ms", (done) => {
-        let tti = _lhResult.preparedResults.find(r => {
-                return r.name === 'tti';
-        });
-        console.log("current reading is => " + tti.value + "ms");
-        assert.isBelow(tti.value, 4000);
-        done();
-    });
-});
+}
