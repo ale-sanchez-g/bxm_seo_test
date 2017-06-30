@@ -1,5 +1,8 @@
 const assert = require('chai').assert;
 
+function describeFruit(type) {
+
+
 // Whhhhaaat? Yeah, you can import and use as you like.
 const l_h = require('lighthouse');
 const chromeLauncher = require('lighthouse/chrome-launcher');
@@ -14,11 +17,12 @@ function lighthouse(url, flags = {}, config = null) {
 
 // Define our test url
 // You could just as easily start a local server to test as well
-const testUrl = ['http://www.nowtolove.com.au/','http://www.nowtolove.com.au/fashion', 'http://www.nowtolove.com.au/aww' ];
+//const testUrl = 'http://www.nowtolove.com.au/aww';
+
 
 // Setup lighthouse options
 const lighthouseOptions = {
-    chromeFlags: ['--headless'],
+    chromeFlags: ['--headlessless'],
     mobile: true,
     loadPage: true
 };
@@ -34,11 +38,7 @@ const auditConfig = require('./audits.json');
 // https://github.com/paulirish/pwmetrics/
 const ourMetrics = require('./metrics');
 
-for(var i = 0; i < testUrl.length; i++){
-
-console.log("TESTING URL => " + testUrl[i]);
-
-        describe('Lighthouse PWA Testing', function() {
+    describe('Lighthouse PWA Testing' + type, function() {
             // Retry all tests in this suite up to 2 times
             this.retries(2);
 
@@ -50,7 +50,7 @@ console.log("TESTING URL => " + testUrl[i]);
             let _lhResult = null;
 
             beforeEach('Run Lighthouse base test', (done) => {
-                lighthouse(testUrl[i], lighthouseOptions, auditConfig)
+                lighthouse(type, lighthouseOptions, auditConfig)
                     .then((res) => {
                     _lhResult = ourMetrics.prepareData(res);
             done();
@@ -60,24 +60,33 @@ console.log("TESTING URL => " + testUrl[i]);
 
         // Currently 1000ms is to high the example had 500ms
 
-        it("should have first meaningful paint < 1000ms", (done) => {
+        it("should have first meaningful paint < 800ms", (done) => {
             let ttfmp = _lhResult.preparedResults.find(r => {
                     return r.name === 'ttfmp';
             });
             console.log("current reading is => " + ttfmp.value + "ms");
-            assert.isBelow(ttfmp.value, 1000);
+            assert.isBelow(ttfmp.value, 800);
             done();
         });
 
         // Currently 4000ms is to high the example had 1000ms
 
-        it("should have time to interactive < 2000", (done) => {
+        it("should have time to interactive < 2500", (done) => {
             let tti = _lhResult.preparedResults.find(r => {
                     return r.name === 'tti';
             });
             console.log("current reading is => " + tti.value + "ms");
-            assert.isBelow(tti.value, 2000);
+            assert.isBelow(tti.value, 2500);
             done();
         });
     });
 }
+
+
+const testUrl = ['http://www.nowtolove.com.au/','http://www.nowtolove.com.au/fashion', 'http://www.nowtolove.com.au/aww' ];
+
+for (index = 0; index < testUrl.length; ++index) {
+    console.log("testing => " + testUrl[index]);
+    describeFruit(testUrl[index]);
+};
+
