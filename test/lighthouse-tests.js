@@ -14,7 +14,7 @@ function lighthouse(url, flags = {}, config = null) {
 
 // Define our test url
 // You could just as easily start a local server to test as well
-const testUrl = 'http://now-site.test.bxm.net.au/fashion';
+const testUrl = 'http://www.nowtolove.com.au/';
 
 // Setup lighthouse options
 const lighthouseOptions = {
