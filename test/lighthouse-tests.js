@@ -18,7 +18,7 @@ const testUrl = 'http://www.nowtolove.com.au/';
 
 // Setup lighthouse options
 const lighthouseOptions = {
-    //chromeFlags: ['--headless'],
+    chromeFlags: ['--headless'],
     mobile: true,
     loadPage: true
 };
