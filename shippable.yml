@@ -4,9 +4,9 @@ node_js:
   - 6.1.0
 
 build:
-cache: true
-cache_dir_list:
-    - $SHIPPABLE_BUILD_DIR/node_modules
+  cache: true
+  cache_dir_list:
+      - $SHIPPABLE_BUILD_DIR/node_modules
   ci:
     - sudo apt-get update
     - sudo apt-get install google-chrome-stable
