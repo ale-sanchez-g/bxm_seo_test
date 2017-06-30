@@ -36,21 +36,21 @@ const ourMetrics = require('./metrics');
 
 for(var i = 0; i < testUrl.length; i++){
 
-console.log("TESTING URL => " + i);
+console.log("TESTING URL => " + testUrl[i]);
 
         describe('Lighthouse PWA Testing', function() {
             // Retry all tests in this suite up to 2 times
             this.retries(2);
 
             // Failsafe; could be long depending on what you're trying to test
-            this.timeout(600000);
+            this.timeout(40000);
 
             // We'll run our lighthouse set once and store for compare in this sample
             // you could very easily build a different sort of runner
             let _lhResult = null;
 
             beforeEach('Run Lighthouse base test', (done) => {
-                lighthouse(i, lighthouseOptions, auditConfig)
+                lighthouse(testUrl[i], lighthouseOptions, auditConfig)
                     .then((res) => {
                     _lhResult = ourMetrics.prepareData(res);
             done();
@@ -71,12 +71,12 @@ console.log("TESTING URL => " + i);
 
         // Currently 4000ms is to high the example had 1000ms
 
-        it("should have time to interactive < 4000ms", (done) => {
+        it("should have time to interactive < 2000", (done) => {
             let tti = _lhResult.preparedResults.find(r => {
                     return r.name === 'tti';
             });
             console.log("current reading is => " + tti.value + "ms");
-            assert.isBelow(tti.value, 4000);
+            assert.isBelow(tti.value, 2000);
             done();
         });
     });
