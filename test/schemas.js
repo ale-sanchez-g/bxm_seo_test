@@ -52,7 +52,40 @@ module.exports = {
 
     },
 
-    rssReponseSchema: function() {
+    rssHeaderSchema: function() {
+        return '<?xml version="1.0" encoding="UTF-8"?>\n<rss xmlns:dc="http://purl.org/dc/elements/1.1/" ' +
+            'xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" ' +
+            'version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:mi="http://schemas.ingestion.microsoft.com/common/"><'
+    },
+
+    rssItemSchema: function() {
+        return '<item><title><![CDATA[Kendall Jenner\'s skin doctor tells us what mistake...]]>' +
+            '</title><description><![CDATA[Joe Test Meta Description 861]]></description>' +
+            '<link>http://dev.dolly-site.bauer-media.net.au/fashion/kendall-jenners-skin-doctor-tells-us-what-mistake-3640</link>' +
+            '<guid isPermaLink="true">http://dev.dolly-site.bauer-media.net.au/fashion/kendall-jenners-skin-doctor-tells-us-what-mistake-3640</guid>' +
+            '<category><![CDATA[Fashion]]></category><dc:creator><![CDATA[Dolly]]></dc:creator>' +
+            '<pubDate>2016-01-03T00:35:00Z</pubDate><dc:modified>2017-06-29T15:01:00.36Z</dc:modified>' +
+            '<enclosure url="&quot;http://d3lp4xedbqa8a5.cloudfront.net/s3/digital-cougar-assets/Dolly/2016/01/13/72089/kendallllllzzz-(1).jpg&quot;?height=600" length="0" type="false"/>' +
+            '<content:encoded><![CDATA[<p>Finding the right cleanser, toner, moisturiser yada yada yada can be difficult when you&#39;re prone to acne/have sensetive skin - especially stic' +
+            'king to a routine that works for you.....</p>\n<p><a href="http://dev.dolly-site.bauer-media.net.au/fashion/' +
+            'kendall-jenners-skin-doctor-tells-us-what-mistake-3640" target="_blank">Watch video</a></p>\n<div>' +
+            '<img src="https://media.giphy.com/media/10rQojsTtZoU3S/giphy.gif?width=800" alt="Test Body Image Caption" />' +
+            '<p>Test Body Image Caption</p>\n</div><h2>Test Heading 1</h2><p>Test Quote</p>\n]]></content:encoded>' +
+            '<media:content url="&quot;http://d3lp4xedbqa8a5.cloudfront.net/s3/digital-cougar-assets/Dolly/2016/01/13/72089/' +
+            'kendallllllzzz-(1).jpg&quot;?height=600" type=""><media:thumbnail url="&quot;http://d3lp4xedbqa8a5.cloudfront.net/s3/' +
+            'digital-cougar-assets/Dolly/2016/01/13/72089/kendallllllzzz-(1).jpg&quot;?height=600" type=""></media:thumbnail>' +
+            '<media:title>Test Image Alt Text</media:title><media:text>Test Image Caption</media:text><media:credit>Test Photo Credit</media:credit>' +
+            '<mi:dateTimeWritten>2016-01-03T00:35:00Z</mi:dateTimeWritten><mi:hasSyndicationRights>1</mi:hasSyndicationRights>' +
+            '<mi:licenseId>698525</mi:licenseId><mi:licensorName>BAUER MEDIA PTY LIMITED</mi:licensorName></media:content></item>'
+    },
+
+    rssTopSchema: function() {
+        return '<title><![CDATA[Dolly homepage test title 861]]>' +
+        '</title><description><![CDATA[Dolly homepage test meta description 861]]>' +
+        '</description><link>http://dev.dolly-site.bauer-media.net.au</link>' +
+        '<generator>RSS for Node</generator><lastBuildDate>2017-06-30T05:08:52.02Z</lastBuildDate>' +
+        '<atom:link href="http://dev.rss.services.bauer-media.net.au/rss/dolly/full-content" ' +
+        'rel="self" type="application/rss+xml"/><copyright><![CDATA[2017 BAUER MEDIA PTY LIMITED]]></copyright><ttl>60</ttl>'
     }
 
     // -> proper schemas
@@ -237,3 +270,5 @@ module.exports = {
     //    }
     //}
 };
+
+

@@ -19,6 +19,7 @@ describe('Smoke test of listings service', function() {
             .end(done);
     });
 
+    //Really ugly way to validate XML schema from the bxm RSS service
     it('what to get some contetn from Dolly', function(done) {
         this.retries(2);
         request(app)
@@ -26,10 +27,8 @@ describe('Smoke test of listings service', function() {
         .expect(function(res) {
                 const result = res.text;
                 //console.log(result);
-                assert.include(result, '<channel>');
-                assert.include(result, 'xmlns:mi="http://schemas.ingestion.microsoft.com/common/"');
-                assert.include(result, 'xmlns:media="http://search.yahoo.com/mrss/"');
-                assert.include(result, '</channel>');
+                assert.include(result, schemas.rssHeaderSchema());
+                assert.include(result, schemas.rssItemSchema());
                 assert.include(result, '<![CDATA[Dolly homepage test title 861]]>');
                 assert.include(result, '<link>http://dev.dolly-site.bauer-media.net.au</link>');
                 assert.include(result, '<atom:link href="http://dev.rss.services.bauer-media.net.au/rss/dolly/full-content" rel="self" type="application/rss+xml"/>');
