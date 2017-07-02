@@ -38,7 +38,7 @@ function runTestArray(uri) {
     // https://github.com/paulirish/pwmetrics/
     const ourMetrics = require('./metrics');
 
-    describe('Lighthouse PWA Testing => ' + type, function() {
+    describe('Lighthouse PWA Testing => ' + uri, function() {
             // Retry all tests in this suite up to 2 times
             this.retries(2);
 
