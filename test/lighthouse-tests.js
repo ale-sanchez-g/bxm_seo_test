@@ -1,84 +1,72 @@
-const assert = require('chai').assert;
+const lighthouse = require('lighthouse');
+const chromeLauncher = require('lighthouse/chrome-launcher');
+const auditConfig = require('lighthouse/lighthouse-core/config/perf.json');
 
-function runTestArray(uri) {
-
-
-    // Whhhhaaat? Yeah, you can import and use as you like.
-    const l_h = require('lighthouse');
-    const chromeLauncher = require('lighthouse/chrome-launcher');
-
-    function lighthouse(url, flags = {}, config = null) {
-        return chromeLauncher.launch(flags).then(chrome => {
-            flags.port = chrome.port;
-        return l_h(url, flags, config).then(results =>
-            chrome.kill().then(() => results));
-        });
+const testLinks = [
+    {
+        title: 'article',
+        url: 'http://now-site.test.bxm.net.au/fashion/red-carpet/automation-test-article-with-hero-image-3663/',
+        expectedScore: 45
+    },
+    {
+        title: 'homepage',
+        url: 'http://now-site.test.bxm.net.au/',
+        expectedScore: 45
+    },
+    {
+        title: 'section',
+        url: 'http://now-site.test.bxm.net.au/fashion/',
+        expectedScore: 48
+    },
+    {
+        title: 'gallery',
+        url: 'http://now-site.test.bxm.net.au/fashion/red-carpet/automation-test-gallery-13302/',
+        expectedScore: 47
     }
+];
 
-    // Define our test url
-    // You could just as easily start a local server to test as well
-    //const testUrl = 'http://www.nowtolove.com.au/aww';
-
-    // Setup lighthouse options
-    const lighthouseOptions = {
-        chromeFlags: ['--headlessless'],
-        mobile: true,
-        loadPage: true
-    };
-
-    // You can use your define custom Lighthouse configs, audits, and gatherers!
-    // You could also import pre-existing defines in the lighthouse repo, see:
-    // https://github.com/GoogleChrome/lighthouse/tree/master/lighthouse-core/config
-    // const auditConfig = require('lighthouse/lighthouse-core/config/perf.json');
-    const auditConfig = require('./audits.json');
-
-    // We'll process the results and then pass to our tests
-    // Based on Paul Irish's PWMetric sample
-    // https://github.com/paulirish/pwmetrics/
-    const ourMetrics = require('./metrics');
-
-    describe.skip('Lighthouse PWA Testing => ' + uri, function() {
-        this.retries(2);
-        this.timeout(40000);
-        let _lhResult = null;
-            beforeEach('Run Lighthouse base test', (done) => {
-                lighthouse(uri, lighthouseOptions, auditConfig)
-                    .then((res) => {
-                    _lhResult = ourMetrics.prepareData(res);
-            done();
-            });
-        });
-
-
-        // Currently 1000ms is to high the example had 500ms
-
-        it("should have first meaningful paint < 800ms", (done) => {
-            let ttfmp = _lhResult.preparedResults.find(r => {
-                    return r.name === 'ttfmp';
-            });
-            console.log("current reading is => " + ttfmp.value + "ms");
-            assert.isBelow(ttfmp.value, 800);
-            done();
-        });
-
-        // Currently 4000ms is to high the example had 1000ms
-
-        it("should have time to interactive < 2500", (done) => {
-            let tti = _lhResult.preparedResults.find(r => {
-                    return r.name === 'tti';
-            });
-            console.log("current reading is => " + tti.value + "ms");
-            assert.isBelow(tti.value, 2500);
-            done();
-        });
-    });
+function lighthouseInit(url, flags = {}, config = null) {
+    return chromeLauncher.launch(flags).then((chrome) => {
+            const generatedFlags = {
+                port: chrome.port
+            };
+    return lighthouse(url, generatedFlags, config).then(results =>
+        chrome.kill().then(() => results));
+});
 }
 
-
-const testUrl = ['http://www.nowtolove.com.au/','http://www.nowtolove.com.au/fashion', 'http://www.nowtolove.com.au/aww' ];
-
-for (index = 0; index < testUrl.length; ++index) {
-    console.log("testing => " + testUrl[index]);
-    runTestArray(testUrl[index]);
+function lighthouseTests(testObject) {
+    const lighthouseOptions = {
+        chromeFlags: ['--headless']
     };
+    const { title, url, expectedScore } = testObject;
+    describe(`Now To Love site performance testing for ${title} : ${url}`, function loopedTests() {
+        this.retries(3);
+        this.timeout(40000);
+        let result;
 
+        beforeEach('Run Lighthouse base test', (done) => {
+            lighthouseInit(url, lighthouseOptions, auditConfig)
+                .then(res => res.reportCategories)
+    .then((res) => {
+            result = res;
+        done();
+    })
+.catch((err) => {
+        console.log(err);
+});
+});
+it(`should have a performance score >= ${expectedScore}`, () => {
+    const actualScore = result.find(data => data.id === 'performance').score;
+    console.log(`current score is => ${Math.round(actualScore)}`);
+    assert.isAtLeast(Math.round(actualScore), expectedScore);
+});
+});
+
+}
+
+process.setMaxListeners(12);
+
+testLinks.forEach((doctypeSetting) => {
+    lighthouseTests(doctypeSetting);
+});

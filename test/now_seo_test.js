@@ -3,7 +3,7 @@ var request = require('supertest');
 var htmlparser = require("htmlparser2");
 var schemas = require("./schemas.js");
 
-const app = "https://www.carsguide.com.au";
+const app = "http://now-site.test.bxm.net.au";
 
 
 describe('SEO Schema validations', function() {
@@ -21,14 +21,11 @@ describe('SEO Schema validations', function() {
                     ontext: function(text){
                         if(text.indexOf("schema.org") > -1) {
                             var mainJson = JSON.parse(text);
-                            console.log(mainJson);
                             if (mainJson["@context"] !== mainSchema["@context"]) throw new Error("Context is incorrect : \n" + mainJson["@context"]);
-                            //if (mainJson["url"] !== mainSchema["url"]) throw new Error("URL is incorrect : \n" + mainJson["url"]);
-                            //if (mainJson["@type"] !== mainSchema["@type"]) throw new Error("Type is incorrect : \n" + mainJson["@type"]);
-
-                            //if (mainJson["potentialAction"]["@type"] !== mainSchema["potentialAction"]["@type"]) throw new Error("potentialAction Type is incorrect : \n" + mainJson["potentialAction"]["@type"]);
-                            //if (mainJson["potentialAction"]["target"] !== mainSchema["potentialAction"]["target"]) throw new Error("potentialAction target is incorrect : \n" + mainJson["potentialAction"]["target"]);
-
+                            if (mainJson["url"] !== mainSchema["url"]) throw new Error("URL is incorrect : \n" + mainJson["url"]);
+                            if (mainJson["@type"] !== mainSchema["@type"]) throw new Error("Type is incorrect : \n" + mainJson["@type"]);
+                            if (mainJson["potentialAction"]["@type"] !== mainSchema["potentialAction"]["@type"]) throw new Error("potentialAction Type is incorrect : \n" + mainJson["potentialAction"]["@type"]);
+                            if (mainJson["potentialAction"]["target"] !== mainSchema["potentialAction"]["target"]) throw new Error("potentialAction target is incorrect : \n" + mainJson["potentialAction"]["target"]);
                         }
                     }
                 }, {decodeEntities: true});

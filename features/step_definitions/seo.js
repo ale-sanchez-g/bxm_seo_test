@@ -19,4 +19,11 @@ module.exports = function() {
 
     });
 
+    this.When(/^I submit "([^"]*)" url to be validated$/, function (uri) {
+        browser.waitForVisible("a#new-test-url", 5000);
+        browser.click("a#new-test-url");
+        browser.addValue(".#new-test-url-input", uri);
+        browser.click("button#new-test-submit-button");
+    });
+
 };

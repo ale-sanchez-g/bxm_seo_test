@@ -1,4 +1,3 @@
-@watch
 Feature: I am able to validate my schema for SEO
 
   Scenario: I am able to validate my schema using the google structured-data tool
@@ -27,9 +26,7 @@ Feature: I am able to validate my schema for SEO
     """
     Then I can see there are no Errors or Warning in the validation output
 
-
-
-  Scenario: I am able to validate my schema using the google structured-data tool
+  Scenario: I am able to validate my Article schema using the google structured-data tool
     Given I navigate to "https://search.google.com/structured-data/testing-tool"
     When I submit a validation for my schema
     """
@@ -68,4 +65,9 @@ Feature: I am able to validate my schema for SEO
         }
     </script>
     """
+    Then I can see there are no Errors or Warning in the validation output
+
+  Scenario: I am able to validate my schema using the google structured-data tool
+    Given I navigate to "https://search.google.com/structured-data/testing-tool"
+    When I submit "http://www.nowtolove.com.au" url to be validated
     Then I can see there are no Errors or Warning in the validation output
