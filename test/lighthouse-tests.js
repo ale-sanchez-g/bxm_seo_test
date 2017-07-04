@@ -19,7 +19,6 @@ function runTestArray(uri) {
     // You could just as easily start a local server to test as well
     //const testUrl = 'http://www.nowtolove.com.au/aww';
 
-
     // Setup lighthouse options
     const lighthouseOptions = {
         chromeFlags: ['--headlessless'],
@@ -38,17 +37,10 @@ function runTestArray(uri) {
     // https://github.com/paulirish/pwmetrics/
     const ourMetrics = require('./metrics');
 
-    describe('Lighthouse PWA Testing => ' + uri, function() {
-            // Retry all tests in this suite up to 2 times
-            this.retries(2);
-
-            // Failsafe; could be long depending on what you're trying to test
-            this.timeout(40000);
-
-            // We'll run our lighthouse set once and store for compare in this sample
-            // you could very easily build a different sort of runner
-            let _lhResult = null;
-
+    describe.skip('Lighthouse PWA Testing => ' + uri, function() {
+        this.retries(2);
+        this.timeout(40000);
+        let _lhResult = null;
             beforeEach('Run Lighthouse base test', (done) => {
                 lighthouse(uri, lighthouseOptions, auditConfig)
                     .then((res) => {
@@ -88,5 +80,5 @@ const testUrl = ['http://www.nowtolove.com.au/','http://www.nowtolove.com.au/fas
 for (index = 0; index < testUrl.length; ++index) {
     console.log("testing => " + testUrl[index]);
     runTestArray(testUrl[index]);
-};
+    };
 

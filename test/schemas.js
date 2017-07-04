@@ -1,13 +1,17 @@
 module.exports = {
 
     mainExpectedSchema: function(){
-        return { "@context": 'http://schema.org',
-            "url": 'http://now-site.test.bxm.net.au/',
-            "@type": 'WebSite',
-            potentialAction:
-            { "@type": 'SearchAction',
-                target: 'http://now-site.test.bxm.net.au//search?q={search_term}',
-                'query-input': 'required name=search_term' } }
+        return {
+            "@context": "http://schema.org",
+            "url": "http://now-site.test.bxm.net.au/",
+            "@type": "WebSite",
+            "potentialAction":
+            {
+                "@type": "SearchAction",
+                "target": "http://now-site.test.bxm.net.au//search?q={search_term}",
+                "query-input": "required name=search_term"
+            }
+        }
     },
 
     articleExpectedSchema: function(){
@@ -94,7 +98,14 @@ module.exports = {
     //    return {
     //        "@context": "http://schema.org",
     //        "@type": "WebSite",
+    //        "@id":"#website",
     //        "url": "http://now-site.test.bxm.net.au/",
+    //        "name": "Now To Love
+    //        "sameAs": [
+    //            "https://www.facebook.com/nowtolove",
+    //            "https://twitter.com/NowToLove",
+    //            "https://www.instagram.com/NowToLove/"
+    //        ],
     //        "potentialAction": {
     //            "@type": "SearchAction",
     //            "target": "http://now-site.test.bxm.net.au/tags/{search_term_string}",

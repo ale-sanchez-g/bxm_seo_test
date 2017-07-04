@@ -3,19 +3,32 @@ var request = require('supertest');
 var htmlparser = require("htmlparser2");
 var schemas = require("./schemas.js");
 
-const app = "http://now-site.test.bxm.net.au";
+const app = "https://www.carsguide.com.au";
+
 
 describe('SEO Schema validations', function() {
+    this.retries(2);
 
     it('Go to Homepage of NTL and validate its schema', function(done) {
+
+        var mainSchema = schemas.mainExpectedSchema();
+
+
         request(app)
             .get('/')
             .expect(function(res) {
                 var parser = new htmlparser.Parser({
                     ontext: function(text){
-
                         if(text.indexOf("schema.org") > -1) {
-                            if (text !== JSON.stringify(schemas.mainExpectedSchema())) throw new Error("Schema is not incorrect : \n" + text);
+                            var mainJson = JSON.parse(text);
+                            console.log(mainJson);
+                            if (mainJson["@context"] !== mainSchema["@context"]) throw new Error("Context is incorrect : \n" + mainJson["@context"]);
+                            //if (mainJson["url"] !== mainSchema["url"]) throw new Error("URL is incorrect : \n" + mainJson["url"]);
+                            //if (mainJson["@type"] !== mainSchema["@type"]) throw new Error("Type is incorrect : \n" + mainJson["@type"]);
+
+                            //if (mainJson["potentialAction"]["@type"] !== mainSchema["potentialAction"]["@type"]) throw new Error("potentialAction Type is incorrect : \n" + mainJson["potentialAction"]["@type"]);
+                            //if (mainJson["potentialAction"]["target"] !== mainSchema["potentialAction"]["target"]) throw new Error("potentialAction target is incorrect : \n" + mainJson["potentialAction"]["target"]);
+
                         }
                     }
                 }, {decodeEntities: true});

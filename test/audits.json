@@ -1,5 +1,6 @@
 {
   "passes": [{
+    "useThrottling": true,
     "recordNetwork": true,
     "recordTrace": true,
     "gatherers": [
