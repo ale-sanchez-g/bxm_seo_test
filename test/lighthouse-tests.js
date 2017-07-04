@@ -1,3 +1,5 @@
+const assert = require('chai').assert;
+
 const lighthouse = require('lighthouse');
 const chromeLauncher = require('lighthouse/chrome-launcher');
 const auditConfig = require('lighthouse/lighthouse-core/config/perf.json');
