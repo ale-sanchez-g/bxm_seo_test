@@ -22,7 +22,7 @@
     "desktop:test": "node ./node_modules/lighthouse/lighthouse-cli http://www.nowtolove.com.au/royals/british-royal-family/best-royal-moments-2017-37868 --disable-device-emulation --disable-network-throttling --perf --quiet --chrome-flags='--headless --window-size=1400,700' --view",
     "mocha:test": "mocha",
     "five:test": "bash -c \"for i in {1..5}; do node testing.js; done\"",
-    "chimp": "node ./node_modules/chimp/bin/chimp.js --watch"
+    "chimp": "node ./node_modules/chimp/bin/chimp.js --browser=phantomjs --tags=@test"
   },
   "keywords": [
     "seo"

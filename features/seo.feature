@@ -72,7 +72,7 @@ Feature: I am able to validate my schema for SEO
     When I submit "http://www.nowtolove.com.au" url to be validated
     Then I can see there are no Errors or Warning in the validation output
 
-  @watch
+  @test
   Scenario: I can to ensure my schema matched Google expectations
     Given I a have an NewsArticle schema
     * I can ensure the below properties are populated to be AMP ready

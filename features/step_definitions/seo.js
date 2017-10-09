@@ -51,7 +51,7 @@ module.exports = function() {
         if (jsonContent[0]["@type"] !== "Article") throw new Error("Type is incorrect : \n" + jsonContent[0]["@type"]);
         expect(jsonContent[0]["headline"]).toContain("| Now To Love");
         //if (jsonContent[0]["headline"] !== "Turia Pitt on the lesson she will pass on to her son | Now To Love") throw new Error("Type is incorrect : \n" + jsonContent[0]["headline"]);
-        if (jsonContent[0]["image"]["url"] !== "") throw new Error("Type is incorrect : \n" + jsonContent[0]["image"]["url"]);
+        if (jsonContent[0]["image"]["url"] === "") throw new Error("Type is incorrect : \n" + jsonContent[0]["image"]["url"]);
 
     });
 
