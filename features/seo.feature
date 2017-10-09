@@ -33,7 +33,7 @@ Feature: I am able to validate my schema for SEO
     <script type="application/ld+json">
     {
             "@context": "http://schema.org",
-            "@type": "Article",
+            "@type": "NewsArticle",
             "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "http://now-site.test.bxm.net.au/fashion/models/kendall-jenners-skin-doctor-tells-us-what-mistake-3640"
@@ -71,3 +71,26 @@ Feature: I am able to validate my schema for SEO
     Given I navigate to "https://search.google.com/structured-data/testing-tool"
     When I submit "http://www.nowtolove.com.au" url to be validated
     Then I can see there are no Errors or Warning in the validation output
+
+  @watch
+  Scenario: I can to ensure my schema matched Google expectations
+    Given I a have an NewsArticle schema
+    * I can ensure the below properties are populated to be AMP ready
+    | Properties            |
+    | mainEntityOfPage      |
+    | headline              |
+    | image.url             |
+    | image.height          |
+    | image.width           |
+    | publisher             |
+    | publisher.name        |
+    | publisher.logo        |
+    | publisher.logo.url    |
+    | publisher.logo.height |
+    | publisher.logo.width  |
+    | datePublished         |
+    | dateModified          |
+    | author                |
+    | author.name	        |
+    | description           |
+

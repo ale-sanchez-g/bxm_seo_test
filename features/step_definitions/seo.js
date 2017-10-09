@@ -1,3 +1,6 @@
+var htmlparser = require("htmlparser2");
+
+
 module.exports = function() {
 
     this.Given(/^I navigate to "([^"]*)"$/, function (uri) {
@@ -25,5 +28,32 @@ module.exports = function() {
         browser.addValue(".#new-test-url-input", uri);
         browser.click("button#new-test-submit-button");
     });
+
+    this.Given(/^I a have an NewsArticle schema$/, function () {
+        browser.url("https://www.sit.nowtolove.com.au/amp/news/latest-news/test-article-77116");
+    });
+
+    this.Then(/^I can ensure the below properties are populated to be AMP ready$/, function (table) {
+        var jsonContent = [];
+        var pageHtml = browser.getSource();
+        var parser = new htmlparser.Parser({
+            ontext: function(text){
+                if(text.indexOf("schema.org") > -1) {
+                    var mainJson = JSON.parse(text); //to handle multiple schemas (article, videoObject)
+                    jsonContent.push(mainJson);
+                }
+            }
+        }, {decodeEntities: true});
+        parser.write(pageHtml);
+        parser.end();
+
+        if (jsonContent[0]["@context"] !== "http://schema.org") throw new Error("Context is incorrect : \n" + jsonContent[0]["@context"]);
+        if (jsonContent[0]["@type"] !== "Article") throw new Error("Type is incorrect : \n" + jsonContent[0]["@type"]);
+        expect(jsonContent[0]["headline"]).toContain("| Now To Love");
+        //if (jsonContent[0]["headline"] !== "Turia Pitt on the lesson she will pass on to her son | Now To Love") throw new Error("Type is incorrect : \n" + jsonContent[0]["headline"]);
+        if (jsonContent[0]["image"]["url"] !== "") throw new Error("Type is incorrect : \n" + jsonContent[0]["image"]["url"]);
+
+    });
+
 
 };
